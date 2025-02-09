@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <appender name="APPENDER_LOKI" class="com.github.loki4j.logback.Loki4jAppender">
+        <http>
+            <url>https://loki.domain.one/loki/api/v1/push</url>
+        </http>
+        <format>
+            <label>
+                <pattern>
+                    app=BOT_TWITCH
+                    host=${HOSTNAME}
+                    level=%level
+                    logger=%logger
+                </pattern>
+                <readMarkers>true</readMarkers>
+                <pairSeparator>regex:(\n|//[^\n]+)+</pairSeparator>
+            </label>
+            <message>
+                <pattern>
+                    ${CONSOLE_LOG_PATTERN}
+                </pattern>
+            </message>
+            <sortByTime>true</sortByTime>
+        </format>
+    </appender>
+</included>

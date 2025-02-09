@@ -1,0 +1,76 @@
+{
+  "groups": [
+    {
+      "name": "app.logging.file",
+      "type": "one.mad.logging.properties.FileAppenderProperties",
+      "sourceType": "one.mad.logging.properties.FileAppenderProperties"
+    },
+    {
+      "name": "app.logging.filter.duplicate-message-filter",
+      "type": "one.mad.logging.properties.DuplicateMessageFilterProperties",
+      "sourceType": "one.mad.logging.properties.DuplicateMessageFilterProperties"
+    },
+    {
+      "name": "app.logging.level",
+      "type": "one.mad.logging.properties.CommonProperties$Level",
+      "sourceType": "one.mad.logging.properties.CommonProperties$Level"
+    }
+  ],
+  "properties": [
+    {
+      "name": "app.logging.file.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enables logging to the file.",
+      "sourceType": "one.mad.logging.properties.FileAppenderProperties"
+    },
+    {
+      "name": "app.logging.file.name",
+      "type": "java.lang.String",
+      "description": "Updates application's file name for the logging.",
+      "sourceType": "one.mad.logging.properties.FileAppenderProperties"
+    },
+    {
+      "name": "app.logging.filter.duplicate-message-filter.cache-size",
+      "type": "java.lang.Integer",
+      "description": "How much unique messages can be stored in cache.",
+      "sourceType": "one.mad.logging.properties.DuplicateMessageFilterProperties"
+    },
+    {
+      "name": "app.logging.filter.duplicate-message-filter.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enables DuplicateMessageFilter. @see one.mad.logging.filter.DuplicateMessageFilter",
+      "sourceType": "one.mad.logging.properties.DuplicateMessageFilterProperties"
+    },
+    {
+      "name": "app.logging.filter.duplicate-message-filter.expire",
+      "type": "java.lang.Integer",
+      "description": "Seconds after which log will be counted back for repeats.",
+      "sourceType": "one.mad.logging.properties.DuplicateMessageFilterProperties"
+    },
+    {
+      "name": "app.logging.filter.duplicate-message-filter.markers",
+      "type": "java.util.List<java.lang.String>",
+      "description": "Marker that will be used to Filter same log message on repeats.",
+      "sourceType": "one.mad.logging.properties.DuplicateMessageFilterProperties"
+    },
+    {
+      "name": "app.logging.filter.duplicate-message-filter.repeats",
+      "type": "java.lang.Integer",
+      "description": "Number of repeats allowed for log to be filtered.",
+      "sourceType": "one.mad.logging.properties.DuplicateMessageFilterProperties"
+    },
+    {
+      "name": "app.logging.level.app",
+      "type": "java.lang.String",
+      "description": "Log level for the application package.",
+      "sourceType": "one.mad.logging.properties.CommonProperties$Level"
+    },
+    {
+      "name": "app.logging.level.root",
+      "type": "java.lang.String",
+      "description": "Log level for the ROOT.",
+      "sourceType": "one.mad.logging.properties.CommonProperties$Level"
+    }
+  ],
+  "hints": []
+}

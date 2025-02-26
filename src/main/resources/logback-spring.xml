@@ -2,12 +2,49 @@
 <configuration>
     <!-- import appenders -->
     <include resource="classic/logging-appender-loki.xml" />
-<!--    <include resource="classic/logging-appender-file.xml" />-->
+    <include resource="classic/logging-appender-file.xml" />
     <include resource="classic/logging-appender-console.xml" />
-
-    <!-- add appenders to root and define levels -->
-    <include resource="classic/logging-common.xml" />
 
     <!-- enables defined log filters -->
     <include resource="classic/logging-filters.xml" />
+
+    <!-- add appenders to root and define levels -->
+    <springProperty name="ROOT_LOGGING_LEVEL" source="app.logging.level.root" defaultValue="WARN"/>
+    <springProperty name="APP_LOGGING_LEVEL" source="app.logging.level.app" defaultValue="INFO"/>
+
+    <root level="${ROOT_LOGGING_LEVEL}">
+        <appender-ref ref="ASYNC_CONSOLE_APPENDER" />
+    </root>
+    <if condition='property("IS_LOKI_APPENDER_ENABLED").equals("true")'>
+        <then>
+            <root>
+                <appender-ref ref="LOKI_APPENDER" />
+            </root>
+        </then>
+    </if>
+    <if condition='property("IS_FILE_APPENDER_ENABLED").equals("true")'>
+        <then>
+            <root>
+                <appender-ref ref="ASYNC_FILE_APPENDER" />
+            </root>
+        </then>
+    </if>
+
+    <logger name="one.mad" level="${APP_LOGGING_LEVEL}" additivity="false">
+        <appender-ref ref="ASYNC_CONSOLE_APPENDER" />
+    </logger>
+    <if condition='property("IS_LOKI_APPENDER_ENABLED").equals("true")'>
+        <then>
+            <root>
+                <appender-ref ref="LOKI_APPENDER" />
+            </root>
+        </then>
+    </if>
+    <if condition='property("IS_FILE_APPENDER_ENABLED").equals("true")'>
+        <then>
+            <logger name="one.mad">
+                <appender-ref ref="ASYNC_FILE_APPENDER" />
+            </logger>
+        </then>
+    </if>
 </configuration>

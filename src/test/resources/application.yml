@@ -17,3 +17,7 @@ app:
     file:
       enabled: false
       name: app.log
+
+    loki:
+      enabled: false
+      name: TEST_APP

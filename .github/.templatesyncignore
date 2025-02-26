@@ -1,2 +1,4 @@
 ./.github/workflows/example-loop.yml
 ./.github/workflows/secrets-update.yml
+./.gitignore
+./README.md

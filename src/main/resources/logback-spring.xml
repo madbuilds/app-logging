@@ -2,7 +2,7 @@
 <configuration>
     <!-- import appenders -->
     <include resource="classic/logging-appender-loki.xml" />
-<!--    <include resource="classic/logging-appender-file.xml" />-->
+    <include resource="classic/logging-appender-file.xml" />
     <include resource="classic/logging-appender-console.xml" />
 
     <!-- add appenders to root and define levels -->

@@ -4,9 +4,15 @@
     <springProperty name="APP_LOGGING_LEVEL" source="app.logging.level.app" defaultValue="INFO"/>
 
     <root level="${ROOT_LOGGING_LEVEL}">
-        <appender-ref ref="APPENDER_LOKI" />
         <appender-ref ref="ASYNC_CONSOLE_APPENDER" />
     </root>
+    <if condition='property("IS_LOKI_APPENDER_ENABLED").equals("true")'>
+        <then>
+            <root>
+                <appender-ref ref="LOKI_APPENDER" />
+            </root>
+        </then>
+    </if>
     <if condition='property("IS_FILE_APPENDER_ENABLED").equals("true")'>
         <then>
             <root>
@@ -16,9 +22,15 @@
     </if>
 
     <logger name="one.mad" level="${APP_LOGGING_LEVEL}" additivity="false">
-        <appender-ref ref="APPENDER_LOKI" />
         <appender-ref ref="ASYNC_CONSOLE_APPENDER" />
     </logger>
+    <if condition='property("IS_LOKI_APPENDER_ENABLED").equals("true")'>
+        <then>
+            <root>
+                <appender-ref ref="LOKI_APPENDER" />
+            </root>
+        </then>
+    </if>
     <if condition='property("IS_FILE_APPENDER_ENABLED").equals("true")'>
         <then>
             <logger name="one.mad">

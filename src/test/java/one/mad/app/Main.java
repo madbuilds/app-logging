@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 
+import java.util.concurrent.TimeUnit;
+
 import static one.mad.logging.Marker.FILTERED;
 
 @Slf4j
@@ -33,7 +35,7 @@ public class Main {
         }
 
         try {
-            Thread.sleep(61000L);
+            TimeUnit.SECONDS.sleep(60);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

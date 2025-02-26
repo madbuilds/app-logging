@@ -1,5 +1,6 @@
 package one.mad.logging.level;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
 import org.springframework.boot.context.event.ApplicationFailedEvent;
@@ -22,6 +23,7 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
+@Slf4j
 public class LoggingLevelConfiguration implements GenericApplicationListener {
     private static final ConfigurationPropertyName LOGGING_LEVEL = ConfigurationPropertyName.of("app.logging.level");
     private static final Bindable<Map<String, LogLevel>> STRING_LOGLEVEL_MAP = Bindable.mapOf(String.class, LogLevel.class);
@@ -84,8 +86,8 @@ public class LoggingLevelConfiguration implements GenericApplicationListener {
             try {
                 name = name.equalsIgnoreCase("ROOT") ? null : name;
                 system.setLogLevel(name, level);
-            } catch (RuntimeException var5) {
-//                this.logger.error(LogMessage.format("Cannot set level '%s' for '%s'", level, name));
+            } catch (RuntimeException exception) {
+                log.error("Cannot set level {} for {}", level, name, exception);
             }
         };
     }

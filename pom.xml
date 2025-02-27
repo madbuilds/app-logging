@@ -18,7 +18,7 @@
 
         <!-- DEPENDENCY VERSIONS -->
         <spring.boot.version>3.4.0</spring.boot.version>
-        <guava.version>33.0.0-jre</guava.version>
+        <loki.logback.version>1.6.0</loki.logback.version>
     </properties>
 
     <dependencyManagement>
@@ -55,17 +55,12 @@
             <groupId>org.codehaus.janino</groupId>
             <artifactId>janino</artifactId>
         </dependency>
-        <dependency> <!-- simple cache implementation -->
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
-        </dependency>
 
         <!-- LOKI -->
         <dependency>
             <groupId>com.github.loki4j</groupId>
             <artifactId>loki-logback-appender</artifactId>
-            <version>1.5.1</version>
+            <version>${loki.logback.version}</version>
         </dependency>
 
         <!-- TEST DEPENDENCIES -->

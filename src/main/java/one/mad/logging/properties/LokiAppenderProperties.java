@@ -23,10 +23,10 @@ public class LokiAppenderProperties {
     /**
      * loki endpoint url to push logs to (check if URI needs to be updated as well)
      */
-    private String url = "http://localhost/";
+    private String url = "http://localhost/loki/api/v1/push";
 
     /**
      * loki endpoint uri where logs will be pushed to (check URL is correct also)
      */
-    private String uri = "loki/api/v1/push";
+    private String uri = "";
 }

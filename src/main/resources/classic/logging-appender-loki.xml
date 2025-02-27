@@ -4,25 +4,40 @@
     <if condition='property("IS_LOKI_APPENDER_ENABLED").equals("true")'>
         <then>
             <springProperty name="LOKI_APP_NAME" source="app.logging.loki.name" defaultValue="APP_${HOSTNAME}"/>
-            <springProperty name="LOKI_URL" source="app.logging.loki.url" defaultValue="http://localhost/"/>
-            <springProperty name="LOKI_URI" source="app.logging.loki.uri" defaultValue="loki/api/v1/push"/>
+            <springProperty name="IS_LOKI_URL_PROVIDED" source="app.logging.loki.url" defaultValue="false"/>
+            <if condition='property("IS_LOKI_URL_PROVIDED").equals("false")'>
+                <then>
+                    <springProperty name="LOKI_URL" source="app.logging.loki.url" defaultValue="http://localhost/"/>
+                    <springProperty name="LOKI_URI" source="app.logging.loki.uri" defaultValue="loki/api/v1/push"/>
+                </then>
+                <else>
+                    <springProperty name="LOKI_URL" source="app.logging.loki.url" defaultValue=""/>
+                    <springProperty name="LOKI_URI" source="app.logging.loki.uri" defaultValue=""/>
+                </else>
+            </if>
 
             <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
             <appender name="LOKI_APPENDER" class="com.github.loki4j.logback.Loki4jAppender">
                 <http>
-                    <url>${LOKI_URL}/${LOKI_URI}</url>
+                    <url>${LOKI_URL}${LOKI_URI}</url>
                 </http>
                 <format>
                     <label>
+                        <readMarkers>true</readMarkers>
+                        <pairSeparator>regex:(\n|//[^\n]+)+</pairSeparator>
                         <pattern>
                             app=${LOKI_APP_NAME}
                             host=${HOSTNAME}
                             level=%level
                             logger=%logger
                         </pattern>
-                        <readMarkers>true</readMarkers>
-                        <pairSeparator>regex:(\n|//[^\n]+)+</pairSeparator>
+                        <structuredMetadataPattern>
+                            level = %level,
+                            thread = %thread,
+                            class = %logger,
+                            traceId = %mdc{traceId:-none}
+                        </structuredMetadataPattern>
                     </label>
                     <message>
                         <pattern>

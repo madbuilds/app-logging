@@ -10,8 +10,8 @@ app:
         markers:
           FILTERED
           EXAMPLE
-        repeats: 5
-        expire: 60
+        repeats: 3
+        expire: 5
         cache-size: 100
 
     file:

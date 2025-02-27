@@ -27,8 +27,9 @@ public class Main {
 
         log.trace("TEST TRACE 0");
         log.debug("TEST DEBUG 1");
-        log.warn( "TEST WARN  2");
-        log.error("TEST ERROR 3");
+        log.info( "TEST INFO  2");
+        log.warn( "TEST WARN  3");
+        log.error("TEST ERROR 4");
 
         Marker EXAMPLE = MarkerFactory.getMarker("EXAMPLE");
         for (int i = 1; i < 100; i++) {
@@ -36,7 +37,7 @@ public class Main {
         }
 
         try {
-            TimeUnit.SECONDS.sleep(60);
+            TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

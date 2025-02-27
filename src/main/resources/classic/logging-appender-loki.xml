@@ -15,14 +15,20 @@
                 </http>
                 <format>
                     <label>
+                        <readMarkers>true</readMarkers>
+                        <pairSeparator>regex:(\n|//[^\n]+)+</pairSeparator>
                         <pattern>
                             app=${LOKI_APP_NAME}
                             host=${HOSTNAME}
                             level=%level
                             logger=%logger
                         </pattern>
-                        <readMarkers>true</readMarkers>
-                        <pairSeparator>regex:(\n|//[^\n]+)+</pairSeparator>
+                        <structuredMetadataPattern>
+                            level = %level,
+                            thread = %thread,
+                            class = %logger,
+                            traceId = %mdc{traceId:-none}
+                        </structuredMetadataPattern>
                     </label>
                     <message>
                         <pattern>

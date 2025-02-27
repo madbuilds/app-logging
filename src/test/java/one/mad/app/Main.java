@@ -25,9 +25,10 @@ public class Main {
             log.info(FILTERED, "MESSAGE TO BE TESTED: {}", i);
         }
 
+        log.trace("TEST TRACE 0");
         log.debug("TEST DEBUG 1");
-        log.debug("TEST DEBUG 2");
-        log.debug("TEST DEBUG 3");
+        log.warn( "TEST WARN  2");
+        log.error("TEST ERROR 3");
 
         Marker EXAMPLE = MarkerFactory.getMarker("EXAMPLE");
         for (int i = 1; i < 100; i++) {

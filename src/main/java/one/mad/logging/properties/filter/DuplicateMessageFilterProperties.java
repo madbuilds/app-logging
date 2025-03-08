@@ -1,4 +1,4 @@
-package one.mad.logging.properties;
+package one.mad.logging.properties.filter;
 
 import lombok.Getter;
 import lombok.Setter;

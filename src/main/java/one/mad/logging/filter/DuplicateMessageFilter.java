@@ -17,7 +17,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-import static one.mad.logging.properties.DuplicateMessageFilterProperties.*;
+import static one.mad.logging.properties.filter.DuplicateMessageFilterProperties.*;
 
 /**
  * Custom DuplicateMessageFilter that can be used in spring logback.xml file to enable log message filtering.

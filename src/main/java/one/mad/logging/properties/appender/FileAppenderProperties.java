@@ -1,4 +1,4 @@
-package one.mad.logging.properties;
+package one.mad.logging.properties.appender;
 
 import lombok.Getter;
 import lombok.Setter;

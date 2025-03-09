@@ -18,6 +18,7 @@
 
         <!-- DEPENDENCY VERSIONS -->
         <spring.boot.version>3.4.3</spring.boot.version>
+        <lombok.version>1.18.36</lombok.version>
         <loki.logback.version>1.6.0</loki.logback.version>
     </properties>
 
@@ -42,6 +43,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
             <optional>true</optional>
         </dependency>
 
@@ -83,6 +85,13 @@
                         <!-- required for @ConfigurationProperties with @ConstructorBinding -->
                         <arg>-parameters</arg>
                     </compilerArgs>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
         </plugins>

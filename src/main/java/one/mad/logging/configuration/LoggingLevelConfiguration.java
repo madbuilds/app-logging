@@ -1,4 +1,4 @@
-package one.mad.logging.level;
+package one.mad.logging.configuration;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;

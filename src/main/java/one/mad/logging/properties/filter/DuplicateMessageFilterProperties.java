@@ -27,7 +27,7 @@ public class DuplicateMessageFilterProperties {
     /**
      * Marker that will be used to Filter same log message on repeats.
      */
-    private List<String> markers = List.of(DEFAULT_MARKERS);
+    private String markers = DEFAULT_MARKERS;
 
     /**
      * Number of repeats allowed for log to be filtered.
@@ -43,4 +43,8 @@ public class DuplicateMessageFilterProperties {
      * How much unique messages can be stored in cache.
      */
     private int cacheSize = DEFAULT_CACHE_SIZE;
+
+    public List<String> getMarkersAsList() {
+        return List.of(markers.split("\\s"));
+    }
 }

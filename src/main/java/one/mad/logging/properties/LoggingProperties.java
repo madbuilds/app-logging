@@ -1,44 +1,64 @@
 package one.mad.logging.properties;
 
 import lombok.Getter;
-import lombok.Setter;
 import one.mad.logging.properties.appender.FileAppenderProperties;
 import one.mad.logging.properties.appender.LokiAppenderProperties;
 import one.mad.logging.properties.filter.DuplicateMessageFilterProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.bind.ConstructorBinding;
 import org.springframework.boot.logging.LogLevel;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
 @Getter
-@Setter
-@Configuration
 @ConfigurationProperties("app.logging")
 public class LoggingProperties {
-    private Map<String, LogLevel> level;
+    private final Map<String, LogLevel> level;
 
-    private FilterProperties filter;
-    private FileAppenderProperties file;
-    private LokiAppenderProperties loki;
+    private final FilterProperties filter;
+    private final FileAppenderProperties file;
+    private final LokiAppenderProperties loki;
+
+    @ConstructorBinding
+    public LoggingProperties(
+            Map<String, LogLevel> level,
+            FilterProperties filter,
+            FileAppenderProperties file,
+            LokiAppenderProperties loki
+    ) {
+        this.level = level;
+        this.filter = filter;
+        this.file = file;
+        this.loki = loki;
+    }
 
     @Getter
-    @Setter
-    @Configuration
     @ConfigurationProperties("app.logging.level")
     public static class LevelProperties {
         /**
          * Log level for the ROOT.
          */
-        private LogLevel root;
+        private final  LogLevel root;
+
+        @ConstructorBinding
+        public LevelProperties(
+                LogLevel root
+        ) {
+            this.root = root;
+        }
     }
 
     @Getter
-    @Setter
-    @Configuration
     @ConfigurationProperties("app.logging.filter")
     public static class FilterProperties {
-        DuplicateMessageFilterProperties duplicateMessageFilter;
+        private final DuplicateMessageFilterProperties duplicateMessageFilter;
+
+        @ConstructorBinding
+        public FilterProperties(
+                DuplicateMessageFilterProperties duplicateMessageFilter
+        ) {
+            this.duplicateMessageFilter = duplicateMessageFilter;
+        }
     }
 }
 

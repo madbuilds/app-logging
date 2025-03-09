@@ -1,13 +1,11 @@
 package one.mad.logging.configuration;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
-@ComponentScan({
+@ConfigurationPropertiesScan({
         "one.mad.logging.properties"
 })
 @AutoConfiguration
 public class LoggingAutoConfiguration {
 }
-
-

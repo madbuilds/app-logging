@@ -1,1 +1,1 @@
-org.springframework.context.ApplicationListener=one.mad.logging.configuration.LoggingLevelConfiguration
+org.springframework.context.ApplicationListener=com.github.mad.logging.configuration.LoggingLevelConfiguration

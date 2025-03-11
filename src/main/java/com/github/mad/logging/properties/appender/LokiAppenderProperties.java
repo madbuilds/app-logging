@@ -1,4 +1,4 @@
-package one.mad.logging.properties.appender;
+package com.github.mad.logging.properties.appender;
 
 import lombok.Getter;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -1,10 +1,10 @@
-package one.mad.logging.configuration;
+package com.github.mad.logging.configuration;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 @ConfigurationPropertiesScan({
-        "one.mad.logging.properties"
+        "com.github.mad.logging.properties"
 })
 @AutoConfiguration
 public class LoggingAutoConfiguration {

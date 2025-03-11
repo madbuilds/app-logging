@@ -1,4 +1,4 @@
-package one.mad.app;
+package com.github.mad.app;
 
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Marker;
@@ -10,7 +10,7 @@ import org.springframework.context.event.EventListener;
 
 import java.util.concurrent.TimeUnit;
 
-import static one.mad.logging.Marker.FILTERED;
+import static com.github.mad.logging.Marker.FILTERED;
 
 @Slf4j
 @SpringBootApplication

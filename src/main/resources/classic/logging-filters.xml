@@ -8,7 +8,7 @@
             <springProperty name="EXPIRES" source="app.logging.filter.duplicate-message-filter.expire" />
             <springProperty name="CACHE_SIZE" source="app.logging.filter.duplicate-message-filter.cache-size" />
 
-            <turboFilter class="one.mad.logging.filter.DuplicateMessageFilter">
+            <turboFilter class="com.github.mad.logging.filter.DuplicateMessageFilter">
                 <if condition='isDefined("MARKERS")'>
                     <then>
                         <includeMarkers>${MARKERS}</includeMarkers>

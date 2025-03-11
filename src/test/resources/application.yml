@@ -2,7 +2,7 @@ app:
   logging:
     level:
       root: warn
-      one.mad: info
+      com.github.mad: info
 
     filter:
       duplicate-message-filter:

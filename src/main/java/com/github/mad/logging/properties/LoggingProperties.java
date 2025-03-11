@@ -1,9 +1,9 @@
-package one.mad.logging.properties;
+package com.github.mad.logging.properties;
 
 import lombok.Getter;
-import one.mad.logging.properties.appender.FileAppenderProperties;
-import one.mad.logging.properties.appender.LokiAppenderProperties;
-import one.mad.logging.properties.filter.DuplicateMessageFilterProperties;
+import com.github.mad.logging.properties.appender.FileAppenderProperties;
+import com.github.mad.logging.properties.appender.LokiAppenderProperties;
+import com.github.mad.logging.properties.filter.DuplicateMessageFilterProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.bind.ConstructorBinding;
 import org.springframework.boot.logging.LogLevel;

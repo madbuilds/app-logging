@@ -28,7 +28,7 @@ public class LoggingLevelConfiguration implements GenericApplicationListener {
     private static final ConfigurationPropertyName LOGGING_LEVEL = ConfigurationPropertyName.of("app.logging.level");
     private static final Bindable<Map<String, LogLevel>> STRING_LOGLEVEL_MAP = Bindable.mapOf(String.class, LogLevel.class);
 
-    private static final Class<?>[] EVENT_TYPES = new Class[] {
+    private static final Class<?>[] EVENT_TYPES = new Class<?>[] {
             ApplicationStartingEvent.class,
             ApplicationEnvironmentPreparedEvent.class,
             ApplicationPreparedEvent.class,
@@ -66,7 +66,7 @@ public class LoggingLevelConfiguration implements GenericApplicationListener {
         init(environmentPreparedEvent.getEnvironment(), application.getClassLoader());
     }
 
-    private void init(Environment environment, ClassLoader classLoader) {
+    private void init(Environment environment, @SuppressWarnings("unused") ClassLoader classLoader) {
         initializeLoggingLevels(environment, loggingSystem);
     }
 

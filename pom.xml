@@ -18,7 +18,6 @@
 
         <!-- DEPENDENCY VERSIONS -->
         <spring.boot.version>3.4.3</spring.boot.version>
-        <lombok.version>1.18.36</lombok.version>
         <loki.logback.version>1.6.0</loki.logback.version>
     </properties>
 
@@ -43,7 +42,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
             <optional>true</optional>
         </dependency>
 
@@ -82,16 +80,14 @@
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
                     <compilerArgs>
-                        <!-- required for @ConfigurationProperties with @ConstructorBinding -->
-                        <arg>-parameters</arg>
+                        <arg>-parameters</arg> <!-- required for @ConfigurationProperties with @ConstructorBinding -->
+                        <arg>-Xlint:-processing</arg> <!-- enables warning messages during compilation -->
+                        <arg>-g</arg> <!-- includes debugging information for sources (lines, vars) -->
                     </compilerArgs>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                            <version>${lombok.version}</version>
-                        </path>
-                    </annotationProcessorPaths>
+                    <annotationProcessors>
+                        <annotationProcessor>lombok.launch.AnnotationProcessorHider$AnnotationProcessor</annotationProcessor>
+                        <annotationProcessor>lombok.launch.AnnotationProcessorHider$ClaimingProcessor</annotationProcessor>
+                    </annotationProcessors>
                 </configuration>
             </plugin>
         </plugins>

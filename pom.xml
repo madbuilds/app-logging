@@ -10,6 +10,49 @@
     <name>logging</name>
     <description>logging</description>
 
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>https://opensource.org/license/apache-2-0</url>
+        </license>
+    </licenses>
+
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <repositories>
+                <repository>
+                    <id>github-repo</id>
+                    <url>https://maven.pkg.github.com/madbuilds/repo</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>central-repo</id>
+                    <url>https://repo1.maven.org/maven2</url>
+                </repository>
+            </repositories>
+            <distributionManagement>
+                <repository>
+                    <id>github-dist</id>
+                    <!--suppress UnresolvedMavenProperty -->
+                    <url>https://maven.pkg.github.com/${GITHUB_REPOSITORY}</url>
+                </repository>
+                <snapshotRepository>
+                    <id>github-dist</id>
+                    <!--suppress UnresolvedMavenProperty -->
+                    <url>https://maven.pkg.github.com/${GITHUB_REPOSITORY}</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+    </profiles>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -19,6 +62,9 @@
         <!-- DEPENDENCY VERSIONS -->
         <spring.boot.version>3.4.3</spring.boot.version>
         <loki.logback.version>1.6.0</loki.logback.version>
+
+        <!-- PLUGINS VERSIONS -->
+        <compiler.plugin.version>3.14.0</compiler.plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -51,7 +97,7 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
-        <dependency> <!-- allows to use conditions in logback-spring.xml -->
+        <dependency> <!-- allows using conditions in logback-spring.xml -->
             <groupId>org.codehaus.janino</groupId>
             <artifactId>janino</artifactId>
         </dependency>
@@ -76,6 +122,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>${compiler.plugin.version}</version>
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
@@ -85,8 +132,11 @@
                         <arg>-g</arg> <!-- includes debugging information for sources (lines, vars) -->
                     </compilerArgs>
                     <annotationProcessors>
+                        <!-- lombok: enables processing all lombok annotations -->
                         <annotationProcessor>lombok.launch.AnnotationProcessorHider$AnnotationProcessor</annotationProcessor>
                         <annotationProcessor>lombok.launch.AnnotationProcessorHider$ClaimingProcessor</annotationProcessor>
+                        <!-- spring-boot-configuration-processor: springs annotation processor  -->
+                        <annotationProcessor>org.springframework.boot.configurationprocessor.ConfigurationMetadataAnnotationProcessor</annotationProcessor>
                     </annotationProcessors>
                 </configuration>
             </plugin>

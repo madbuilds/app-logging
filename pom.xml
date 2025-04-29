@@ -64,7 +64,7 @@
         <loki.logback.version>1.6.0</loki.logback.version>
 
         <!-- PLUGINS VERSIONS -->
-        <compiler.plugin.version>3.14.0</compiler.plugin.version>
+        <maven.compiler.version>3.14.0</maven.compiler.version>
     </properties>
 
     <dependencyManagement>

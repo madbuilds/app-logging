@@ -60,7 +60,7 @@
         <java.version>21</java.version>
 
         <!-- DEPENDENCY VERSIONS -->
-        <spring.boot.version>3.4.3</spring.boot.version>
+        <spring.boot.version>3.5.0</spring.boot.version>
         <loki.logback.version>1.6.0</loki.logback.version>
 
         <!-- PLUGINS VERSIONS -->

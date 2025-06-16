@@ -3,23 +3,24 @@ description: deploys library release to maven repo and increase next snapshot ve
 
 inputs:
   settings_path:
-    required: false
     description: 'maven settings.xml path'
+    required: false
     default: .github/maven/settings.xml
   github_repository:
-    required: false
     description: github repository id
+    required: false
     default: ${{ github.repository }}
   github_actor:
-    required: false
     description: actor to use
+    required: false
     default: ${{ github.actor }}
   github_token:
+    description: GitHub token
     required: false
-    description: token to use
+    default: '${{ github.token }}'
   github_actions_username:
-    required: false
     description: username to perform commit
+    required: false
     default: github-actions[bot]
 
 runs:

@@ -10,10 +10,6 @@ on:
       releaseVersion:
         description: "Release Version (v1.2.3 or 1.2.3)"
         required: false
-      autoPublish:
-        description: 'Automatically publish release'
-        type: boolean
-        default: false
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -42,7 +38,6 @@ jobs:
       - name: create Release DRAFT
         env:
           RELEASE_VERSION: ${{ env.INPUT_VERSION || env.POM_VERSION }}
-          AUTO_PUBLISH: ${{ inputs.autoPublish }}
         run: |
           echo "pom   version: ${{ env.POM_VERSION }}"
           echo "input version: ${{ inputs.releaseVersion }} -> ${{ env.INPUT_VERSION }}"
@@ -60,13 +55,7 @@ jobs:
           fi
           
           echo "Creating release draft: v${{ env.RELEASE_VERSION }}"
-          if [[ "${{ env.AUTO_PUBLISH }}" == "true" ]]; then
-            gh release create v${{ env.RELEASE_VERSION }} \
-              --title "Release v${{ env.RELEASE_VERSION }}" \
-              --generate-notes
-          else
-            gh release create v${{ env.RELEASE_VERSION }} \
-              --draft \
-              --title "Release v${{ env.RELEASE_VERSION }}" \
-              --generate-notes
-          fi
+          gh release create v${{ env.RELEASE_VERSION }} \
+            --draft \
+            --title "Release v${{ env.RELEASE_VERSION }}" \
+            --generate-notes

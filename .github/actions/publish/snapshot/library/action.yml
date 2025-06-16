@@ -3,20 +3,21 @@ description: deploys library to maven repository
 
 inputs:
   settings_path:
-    required: false
     description: 'maven settings.xml path'
+    required: false
     default: .github/maven/settings.xml
   github_repository:
-    required: false
     description: github repository id
+    required: false
     default: ${{ github.repository }}
   github_actor:
-    required: false
     description: actor to use
+    required: false
     default: ${{ github.actor }}
   github_token:
+    description: GitHub token
     required: false
-    description: token to use
+    default: '${{ github.token }}'
 
 runs:
   using: composite

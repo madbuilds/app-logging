@@ -61,7 +61,7 @@
 
         <!-- DEPENDENCY VERSIONS -->
         <spring.boot.version>3.5.3</spring.boot.version>
-        <loki.logback.version>1.6.0</loki.logback.version>
+        <loki.logback.version>2.0.0</loki.logback.version>
 
         <!-- PLUGINS VERSIONS -->
         <maven.compiler.version>3.14.0</maven.compiler.version>

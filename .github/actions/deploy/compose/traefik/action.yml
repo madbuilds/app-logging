@@ -50,6 +50,19 @@ inputs:
     required: false
     description: 'join containers to same network with name'
 
+  docker_login_user:
+    required: false
+    description: "user which will be used to for 'docker login'"
+    default: '${{ github.actor }}'
+  docker_login_registry:
+    required: false
+    description: "docker registry where user needs to login with 'docker login'"
+    default: 'unknown'
+  docker_login_token:
+    required: false
+    description: "token which will be used to login with 'docker login' to access images"
+    default: '${{ github.token }}' # Use the GITHUB_TOKEN from the calling workflow
+
 # ----------------------------------------------------------------------
 
 runs:
@@ -453,6 +466,11 @@ runs:
                 export "\$key=\$value"
               done
             done <<< "\$INPUT_PROPERTIES"
+        
+            if [[ "${{ inputs.docker_login_registry }}" != "unknown" ]]; then
+              echo "DOCKER LOGIN to ${{ inputs.docker_login_registry }}"
+              echo "${{ inputs.docker_login_token }}" | docker login "${{ inputs.docker_login_registry }}" -u "${{ inputs.docker_login_user }}" --password-stdin
+            fi
             docker compose -f docker-compose.deploy.yml -f docker-compose.override.yml up -d --remove-orphans
           )
 

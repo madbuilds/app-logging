@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
     <springProperty name="IS_DMF_ENABLED" source="app.logging.filter.duplicate-message-filter.enabled" defaultValue="false" />
-    <if condition='property("IS_DMF_ENABLED").equals("true")'>
+    <condition class="ch.qos.logback.core.boolex.PropertyEqualityCondition">
+        <key>IS_DMF_ENABLED</key>
+        <value>true</value>
+    </condition>
+    <if>
         <then>
             <springProperty name="MARKERS" source="app.logging.filter.duplicate-message-filter.markers" />
             <springProperty name="REPEATS" source="app.logging.filter.duplicate-message-filter.repeats" />
@@ -9,22 +13,34 @@
             <springProperty name="CACHE_SIZE" source="app.logging.filter.duplicate-message-filter.cache-size" />
 
             <turboFilter class="com.github.mad.logging.internal.filter.DuplicateMessageFilter">
-                <if condition='isDefined("MARKERS")'>
+                <condition class="ch.qos.logback.core.boolex.IsPropertyDefinedCondition">
+                    <key>MARKERS</key>
+                </condition>
+                <if>
                     <then>
                         <includeMarkers>${MARKERS}</includeMarkers>
                     </then>
                 </if>
-                <if condition='isDefined("REPEATS")'>
+                <condition class="ch.qos.logback.core.boolex.IsPropertyDefinedCondition">
+                    <key>REPEATS</key>
+                </condition>
+                <if>
                     <then>
                         <allowedRepetitions>${REPEATS}</allowedRepetitions>
                     </then>
                 </if>
-                <if condition='isDefined("EXPIRES")'>
+                <condition class="ch.qos.logback.core.boolex.IsPropertyDefinedCondition">
+                    <key>EXPIRES</key>
+                </condition>
+                <if>
                     <then>
                         <expireAfterWriteSeconds>${EXPIRES}</expireAfterWriteSeconds>
                     </then>
                 </if>
-                <if condition='isDefined("CACHE_SIZE")'>
+                <condition class="ch.qos.logback.core.boolex.IsPropertyDefinedCondition">
+                    <key>CACHE_SIZE</key>
+                </condition>
+                <if>
                     <then>
                         <cacheSize>${CACHE_SIZE}</cacheSize>
                     </then>

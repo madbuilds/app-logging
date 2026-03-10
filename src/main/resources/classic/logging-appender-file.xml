@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
     <springProperty name="IS_FILE_APPENDER_ENABLED" source="app.logging.appender.file.enabled" defaultValue="false"/>
-    <if condition='property("IS_FILE_APPENDER_ENABLED").equals("true")'>
+    <condition class="ch.qos.logback.core.boolex.PropertyEqualityCondition">
+        <key>IS_FILE_APPENDER_ENABLED</key>
+        <value>true</value>
+    </condition>
+    <if>
         <then>
             <springProperty name="LOG_FILE" source="app.logging.appender.file.name" defaultValue="app.log"/>
 

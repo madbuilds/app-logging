@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
     <springProperty name="IS_LOKI_APPENDER_ENABLED" source="app.logging.appender.loki.enabled" defaultValue="false"/>
-    <if condition='property("IS_LOKI_APPENDER_ENABLED").equals("true")'>
+    <condition class="ch.qos.logback.core.boolex.PropertyEqualityCondition">
+        <key>IS_LOKI_APPENDER_ENABLED</key>
+        <value>true</value>
+    </condition>
+    <if>
         <then>
             <springProperty name="LOKI_APP_NAME" source="app.logging.appender.loki.name" defaultValue="APP_${HOSTNAME}"/>
             <springProperty name="IS_LOKI_URL_PROVIDED" source="app.logging.appender.loki.url" defaultValue="false"/>
-            <if condition='property("IS_LOKI_URL_PROVIDED").equals("false")'>
+            <condition class="ch.qos.logback.core.boolex.PropertyEqualityCondition">
+                <key>IS_LOKI_URL_PROVIDED</key>
+                <value>true</value>
+            </condition>
+            <if>
                 <then>
-                    <springProperty name="LOKI_URL" source="app.logging.appender.loki.url" defaultValue="http://localhost/"/>
-                    <springProperty name="LOKI_URI" source="app.logging.appender.loki.uri" defaultValue="loki/api/v1/push"/>
-                </then>
-                <else>
                     <springProperty name="LOKI_URL" source="app.logging.appender.loki.url" defaultValue=""/>
                     <springProperty name="LOKI_URI" source="app.logging.appender.loki.uri" defaultValue=""/>
+                </then>
+                <else>
+                    <springProperty name="LOKI_URL" source="app.logging.appender.loki.url" defaultValue="http://localhost/"/>
+                    <springProperty name="LOKI_URI" source="app.logging.appender.loki.uri" defaultValue="loki/api/v1/push"/>
                 </else>
             </if>
 

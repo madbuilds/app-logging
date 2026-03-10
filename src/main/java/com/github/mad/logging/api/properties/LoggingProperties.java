@@ -16,20 +16,17 @@ public class LoggingProperties {
     private final Map<String, LogLevel> level;
 
     private final FilterProperties filter;
-    private final FileAppenderProperties file;
-    private final LokiAppenderProperties loki;
+    private final AppenderProperties appender;
 
     @ConstructorBinding
     public LoggingProperties(
             Map<String, LogLevel> level,
             FilterProperties filter,
-            FileAppenderProperties file,
-            LokiAppenderProperties loki
+            AppenderProperties appender
     ) {
         this.level = level;
         this.filter = filter;
-        this.file = file;
-        this.loki = loki;
+        this.appender = appender;
     }
 
     @Getter

@@ -1,4 +1,4 @@
-package com.github.mad.logging.properties.appender;
+package com.github.mad.logging.api.properties.appender;
 
 import lombok.Getter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -6,8 +6,11 @@ import org.springframework.boot.context.properties.bind.ConstructorBinding;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
 @Getter
-@ConfigurationProperties("app.logging.file")
+@ConfigurationProperties("app.logging.appender.file")
 public class FileAppenderProperties {
+    public static final String APPENDER_NAME = "ASYNC_FILE_APPENDER";
+    public static final String DEFAULT_FILE_NAME = "app.log";
+
     /**
      * Enables logging to the file.
      */
@@ -21,7 +24,7 @@ public class FileAppenderProperties {
     @ConstructorBinding
     public FileAppenderProperties(
             @DefaultValue("false") boolean enabled,
-            @DefaultValue("app.log") String name
+            @DefaultValue(DEFAULT_FILE_NAME) String name
     ) {
         this.enabled = enabled;
         this.name = name;

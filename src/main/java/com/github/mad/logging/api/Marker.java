@@ -1,4 +1,4 @@
-package com.github.mad.logging;
+package com.github.mad.logging.api;
 
 import org.slf4j.MarkerFactory;
 

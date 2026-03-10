@@ -1,4 +1,4 @@
-package com.github.mad.logging.properties.appender;
+package com.github.mad.logging.api.properties.appender;
 
 import lombok.Getter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -6,8 +6,13 @@ import org.springframework.boot.context.properties.bind.ConstructorBinding;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
 @Getter
-@ConfigurationProperties("app.logging.loki")
+@ConfigurationProperties("app.logging.appender.loki")
 public class LokiAppenderProperties {
+    public static final String APPENDER_NAME = "LOKI_APPENDER";
+    public static final String DEFAULT_TAG_NAME = "APP";
+    public static final String DEFAULT_URI = "loki/api/v1/push";
+    public static final String DEFAULT_URL = "http://localhost/";
+
     /**
      * Enables logging to the loki.
      */
@@ -31,9 +36,9 @@ public class LokiAppenderProperties {
     @ConstructorBinding
     public LokiAppenderProperties(
             @DefaultValue("false") boolean enabled,
-            @DefaultValue("APP") String name,
-            @DefaultValue("http://localhost/loki/api/v1/push") String url,
-            @DefaultValue("") String uri
+            @DefaultValue(DEFAULT_TAG_NAME) String name,
+            @DefaultValue(DEFAULT_URL) String url,
+            @DefaultValue(DEFAULT_URI) String uri
     ) {
         this.enabled = enabled;
         this.name = name;

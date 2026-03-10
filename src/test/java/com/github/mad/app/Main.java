@@ -10,7 +10,7 @@ import org.springframework.context.event.EventListener;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.github.mad.logging.Marker.FILTERED;
+import static com.github.mad.logging.api.Marker.FILTERED;
 
 @Slf4j
 @SpringBootApplication

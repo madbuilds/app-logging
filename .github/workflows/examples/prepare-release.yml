@@ -16,7 +16,6 @@ env:
 
 jobs:
   prepare-release:
-    if: ${{ !startsWith(github.repository, 'madbuilds/template-') }}
     runs-on: ubuntu-latest
     permissions:
       contents: write

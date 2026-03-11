@@ -1,4 +1,4 @@
-# FILE: ./.github/actions/publish/release/docker/action.yml
+# FILE: ./.github/actions/publish/docker/action.yml
 # DESCRIPTION: allows publishing docker images to GitHub Container Registry (GHCR.IO)
 #              build docker image using Dockerfile provided
 #              TAG it based on build running from

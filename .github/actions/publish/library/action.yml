@@ -75,7 +75,7 @@ runs:
       shell: bash
       run: |
         echo "[template] - dependencies: downloading dependencies"
-        mvn dependency:go-offline --settings ${{ inputs.settings_path }}
+        mvn --no-transfer-progress --batch-mode dependency:go-offline --settings "${{ inputs.settings_path }}"
       env:
         GITHUB_ACTOR: ${{ inputs.github_actor }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
@@ -85,7 +85,7 @@ runs:
       shell: bash
       run: |
         echo "[template] - pom: updating version to ${{ steps.init.outputs.version }}"
-        mvn versions:set -DnewVersion=${{ steps.init.outputs.version }} --settings ${{ inputs.settings_path }}
+        mvn --no-transfer-progress --batch-mode versions:set -DnewVersion=${{ steps.init.outputs.version }} --settings "${{ inputs.settings_path }}"
       env:
         GITHUB_ACTOR: ${{ inputs.github_actor }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
@@ -95,8 +95,8 @@ runs:
       shell: bash
       run: |
         echo "[template] - deploy: build and deploy to artifactory"
-        echo "[template] - deploy: artifactory - ${{ inputs.github_repository }}
-        mvn --batch-mode deploy --settings ${{ inputs.settings_path }}
+        echo "[template] - deploy: artifactory - ${{ inputs.github_repository }}"
+        mvn --no-transfer-progress --batch-mode deploy --settings "${{ inputs.settings_path }}"
       env:
         GITHUB_ACTOR: ${{ inputs.github_actor }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
@@ -113,7 +113,7 @@ runs:
 
         echo "[template] - increment: current - ${{ steps.init.outputs.version }}"
         echo "[template] - increment: next    - ${NEXT_VERSION}"
-        mvn versions:set -DnewVersion=${NEXT_VERSION} --settings ${{ inputs.settings_path }}
+        mvn --no-transfer-progress --batch-mode versions:set -DnewVersion=${NEXT_VERSION} --settings "${{ inputs.settings_path }}"
       env:
         GITHUB_ACTOR: ${{ inputs.github_actor }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}

@@ -62,7 +62,8 @@
 
         <!-- DEPENDENCY VERSIONS -->
         <spring.boot.version>3.5.11</spring.boot.version>
-        <loki.logback.version>2.0.3</loki.logback.version>
+        <logstash.version>9.0</logstash.version>
+        <loki.version>2.0.3</loki.version>
 
         <!-- PLUGINS VERSIONS -->
         <maven.compiler.version>3.15.0</maven.compiler.version>
@@ -92,6 +93,21 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- LOGBACK DEPENDENCIES -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.logstash.logback</groupId> <!-- https://github.com/logfellow/logstash-logback-encoder -->
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>${logstash.version}</version>
+        </dependency>
+
         <!-- LOGGING CONFIGURATION DEPENDENCIES -->
         <dependency> <!-- generates properties description for application.yml -->
             <groupId>org.springframework.boot</groupId>
@@ -107,7 +123,7 @@
         <dependency>
             <groupId>com.github.loki4j</groupId>
             <artifactId>loki-logback-appender</artifactId>
-            <version>${loki.logback.version}</version>
+            <version>${loki.version}</version>
         </dependency>
 
         <!-- TEST DEPENDENCIES -->

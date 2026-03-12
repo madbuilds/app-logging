@@ -15,9 +15,13 @@ app:
         cache-size: 100
 
     appender:
+      console: # prints to console
+        enabled: true
+        layout: json
       file: # prints to file
         enabled: false
         name: app.log
+        layout: default
       loki: # prints to loki endpoint
         enabled: false
         name: TEST_APP

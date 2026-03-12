@@ -47,7 +47,7 @@
                             traceId = %mdc{traceId:-none}
                         </structuredMetadataPattern>
                     </label>
-                    <message>
+                    <message class="ch.qos.logback.classic.PatternLayout">
                         <pattern>
                             ${CONSOLE_LOG_PATTERN}
                         </pattern>

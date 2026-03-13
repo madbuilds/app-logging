@@ -14,10 +14,14 @@ app:
         expire: 5
         cache-size: 100
 
-    file:
-      enabled: false
-      name: app.log
-
-    loki:
-      enabled: false
-      name: TEST_APP
+    appender:
+      console: # prints to console
+        enabled: true
+        layout: default
+      file: # prints to file
+        enabled: false
+        name: app.log
+        layout: default
+      loki: # prints to loki endpoint
+        enabled: false
+        name: TEST_APP

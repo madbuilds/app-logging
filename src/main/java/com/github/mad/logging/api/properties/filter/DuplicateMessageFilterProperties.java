@@ -1,5 +1,6 @@
-package com.github.mad.logging.properties.filter;
+package com.github.mad.logging.api.properties.filter;
 
+import com.github.mad.logging.internal.filter.DuplicateMessageFilter;
 import lombok.Getter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.bind.ConstructorBinding;
@@ -18,7 +19,7 @@ public class DuplicateMessageFilterProperties {
 
     /**
      * Enables DuplicateMessageFilter.
-     * @see com.github.mad.logging.filter.DuplicateMessageFilter
+     * @see DuplicateMessageFilter
      */
     private final boolean enabled;
 

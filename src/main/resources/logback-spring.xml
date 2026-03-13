@@ -11,20 +11,37 @@
     <!-- add appenders to root and define levels -->
     <springProperty name="ROOT_LOGGING_LEVEL" source="app.logging.level.root" defaultValue="INFO"/>
 
-    <root level="${ROOT_LOGGING_LEVEL}">
-        <appender-ref ref="ASYNC_CONSOLE_APPENDER" />
-    </root>
-    <if condition='property("IS_LOKI_APPENDER_ENABLED").equals("true")'>
+    <root level="${ROOT_LOGGING_LEVEL}"/>
+    <condition class="ch.qos.logback.core.boolex.PropertyEqualityCondition">
+        <key>IS_LOKI_APPENDER_ENABLED</key>
+        <value>true</value>
+    </condition>
+    <if>
         <then>
             <root>
                 <appender-ref ref="LOKI_APPENDER" />
             </root>
         </then>
     </if>
-    <if condition='property("IS_FILE_APPENDER_ENABLED").equals("true")'>
+    <condition class="ch.qos.logback.core.boolex.PropertyEqualityCondition">
+        <key>IS_FILE_APPENDER_ENABLED</key>
+        <value>true</value>
+    </condition>
+    <if>
         <then>
             <root>
                 <appender-ref ref="ASYNC_FILE_APPENDER" />
+            </root>
+        </then>
+    </if>
+    <condition class="ch.qos.logback.core.boolex.PropertyEqualityCondition">
+        <key>IS_CONSOLE_APPENDER_ENABLED</key>
+        <value>true</value>
+    </condition>
+    <if>
+        <then>
+            <root>
+                <appender-ref ref="ASYNC_CONSOLE_APPENDER" />
             </root>
         </then>
     </if>

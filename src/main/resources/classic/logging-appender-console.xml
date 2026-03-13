@@ -1,9 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
-    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
-    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+    <springProperty name="IS_CONSOLE_APPENDER_ENABLED" source="app.logging.appender.console.enabled" defaultValue="true"/>
+    <condition class="ch.qos.logback.core.boolex.PropertyEqualityCondition">
+        <key>IS_CONSOLE_APPENDER_ENABLED</key>
+        <value>true</value>
+    </condition>
+    <if>
+        <then>
 
-    <appender name="ASYNC_CONSOLE_APPENDER" class="ch.qos.logback.classic.AsyncAppender">
-        <appender-ref ref="CONSOLE"/>
-    </appender>
+            <springProperty name="CONSOLE_APPENDER_LAYOUT" source="app.logging.appender.console.layout" defaultValue="default"/>
+
+            <!-- IF LAYOUT = DEFAULT -->
+            <condition class="com.github.mad.logging.internal.condition.PropertyEqualsNoCaseCondition">
+                <key>CONSOLE_APPENDER_LAYOUT</key>
+                <value>default</value>
+            </condition>
+            <if>
+                <then>
+                    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+                    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+
+                    <appender name="ASYNC_CONSOLE_APPENDER" class="ch.qos.logback.classic.AsyncAppender">
+                        <appender-ref ref="CONSOLE"/>
+                    </appender>
+                </then>
+            </if>
+
+            <!-- IF LAYOUT = JSON -->
+            <condition class="com.github.mad.logging.internal.condition.PropertyEqualsNoCaseCondition">
+                <key>CONSOLE_APPENDER_LAYOUT</key>
+                <value>json</value>
+            </condition>
+            <if>
+                <then>
+                    <appender name="CONSOLE_JSON_APPENDER" class="ch.qos.logback.core.ConsoleAppender">
+                        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+                            <timestampPattern>yyyy-MM-dd'T'HH:mm:ss.SSSX</timestampPattern>
+                            <timeZone>CET</timeZone>
+                            <messageSplitRegex>SYSTEM</messageSplitRegex>
+                            <provider class="net.logstash.logback.composite.loggingevent.LoggingEventPatternJsonProvider">
+                                <pattern>
+                                    {
+                                    "message": "%message"
+                                    }
+                                </pattern>
+                            </provider>
+                            <fieldNames>
+                                <timestamp>timestamp</timestamp>
+                                <version>@version</version>
+                                <level>level</level>
+                                <logger>logger</logger>
+                                <thread>thread</thread>
+                                <message>[ignore]</message>
+                                <levelValue>level_value</levelValue>
+                                <stackTrace>stacktrace</stackTrace>
+                                <mdc>mdc</mdc>
+                                <context>context</context>
+                                <caller>caller</caller>
+                            </fieldNames>
+                        </encoder>
+                    </appender>
+                    <appender name="ASYNC_CONSOLE_APPENDER" class="ch.qos.logback.classic.AsyncAppender">
+                        <appender-ref ref="CONSOLE_JSON_APPENDER"/>
+                    </appender>
+                </then>
+            </if>
+        </then>
+    </if>
 </included>

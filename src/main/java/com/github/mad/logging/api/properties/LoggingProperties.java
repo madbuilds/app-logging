@@ -1,9 +1,10 @@
 package com.github.mad.logging.api.properties;
 
-import lombok.Getter;
+import com.github.mad.logging.api.properties.appender.ConsoleAppenderProperties;
 import com.github.mad.logging.api.properties.appender.FileAppenderProperties;
 import com.github.mad.logging.api.properties.appender.LokiAppenderProperties;
 import com.github.mad.logging.api.properties.filter.DuplicateMessageFilterProperties;
+import lombok.Getter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.bind.ConstructorBinding;
 import org.springframework.boot.logging.LogLevel;
@@ -61,14 +62,17 @@ public class LoggingProperties {
     @Getter
     @ConfigurationProperties("app.logging.appender")
     public static class AppenderProperties {
+        private final ConsoleAppenderProperties console;
         private final FileAppenderProperties file;
         private final LokiAppenderProperties loki;
 
         @ConstructorBinding
         public AppenderProperties(
+                ConsoleAppenderProperties console,
                 FileAppenderProperties file,
                 LokiAppenderProperties loki
         ) {
+            this.console = console;
             this.file = file;
             this.loki = loki;
         }

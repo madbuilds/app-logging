@@ -10,49 +10,6 @@
     <name>logging</name>
     <description>logging</description>
 
-    <licenses>
-        <license>
-            <name>Apache License 2.0</name>
-            <url>https://opensource.org/license/apache-2-0</url>
-        </license>
-    </licenses>
-
-    <profiles>
-        <profile>
-            <id>default</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-
-            <repositories>
-                <repository>
-                    <id>github-repo</id>
-                    <url>https://maven.pkg.github.com/madbuilds/repo</url>
-                    <snapshots>
-                        <enabled>true</enabled>
-                        <updatePolicy>always</updatePolicy>
-                    </snapshots>
-                </repository>
-                <repository>
-                    <id>central-repo</id>
-                    <url>https://repo1.maven.org/maven2</url>
-                </repository>
-            </repositories>
-            <distributionManagement>
-                <repository>
-                    <id>github-dist</id>
-                    <!--suppress UnresolvedMavenProperty -->
-                    <url>https://maven.pkg.github.com/${GITHUB_REPOSITORY}</url>
-                </repository>
-                <snapshotRepository>
-                    <id>github-dist</id>
-                    <!--suppress UnresolvedMavenProperty -->
-                    <url>https://maven.pkg.github.com/${GITHUB_REPOSITORY}</url>
-                </snapshotRepository>
-            </distributionManagement>
-        </profile>
-    </profiles>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -102,10 +59,22 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>tools.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>3.1.0</version>
+        </dependency>
         <dependency>
             <groupId>net.logstash.logback</groupId> <!-- https://github.com/logfellow/logstash-logback-encoder -->
             <artifactId>logstash-logback-encoder</artifactId>
             <version>${logstash.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>tools.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- LOGGING CONFIGURATION DEPENDENCIES -->
@@ -164,4 +133,47 @@
             </plugin>
         </plugins>
     </build>
+
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>https://opensource.org/license/apache-2-0</url>
+        </license>
+    </licenses>
+
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <repositories>
+                <repository>
+                    <id>github-repo</id>
+                    <url>https://maven.pkg.github.com/madbuilds/repo</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>central-repo</id>
+                    <url>https://repo1.maven.org/maven2</url>
+                </repository>
+            </repositories>
+            <distributionManagement>
+                <repository>
+                    <id>github-dist</id>
+                    <!--suppress UnresolvedMavenProperty -->
+                    <url>https://maven.pkg.github.com/${GITHUB_REPOSITORY}</url>
+                </repository>
+                <snapshotRepository>
+                    <id>github-dist</id>
+                    <!--suppress UnresolvedMavenProperty -->
+                    <url>https://maven.pkg.github.com/${GITHUB_REPOSITORY}</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+    </profiles>
 </project>

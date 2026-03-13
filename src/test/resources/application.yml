@@ -17,7 +17,7 @@ app:
     appender:
       console: # prints to console
         enabled: true
-        layout: json
+        layout: default
       file: # prints to file
         enabled: false
         name: app.log

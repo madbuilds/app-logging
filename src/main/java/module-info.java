@@ -13,4 +13,7 @@ module app.logging {
     requires lombok;
     requires ch.qos.logback.classic;
     requires ch.qos.logback.core;
+    requires org.aspectj.weaver;
+    requires spring.expression;
+    requires spring.beans;
 }

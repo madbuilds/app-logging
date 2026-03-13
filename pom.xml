@@ -63,7 +63,7 @@
         <dependency>
             <groupId>tools.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>3.1.0</version>
+            <version>3.0.4</version>
         </dependency>
         <dependency>
             <groupId>net.logstash.logback</groupId> <!-- https://github.com/logfellow/logstash-logback-encoder -->
@@ -82,10 +82,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
-        </dependency>
-        <dependency> <!-- allows using conditions in logback-spring.xml -->
-            <groupId>org.codehaus.janino</groupId>
-            <artifactId>janino</artifactId>
         </dependency>
 
         <!-- LOKI -->

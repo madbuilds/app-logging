@@ -32,7 +32,7 @@ jobs:
           private_key: ${{ env.SYNC_PRIVATE_KEY }}
 
       - id: checkout # https://github.com/actions/checkout#usage
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           token: '${{ steps.auth.outputs.token }}'
 

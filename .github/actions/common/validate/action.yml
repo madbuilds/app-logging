@@ -54,7 +54,7 @@ runs:
 
     - name: checkout
       id: checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - id: environment
       shell: bash

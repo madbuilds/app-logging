@@ -22,7 +22,7 @@ jobs:
       environment: ${{ steps.repository.outputs.environment }}
       repository_type: ${{ steps.repository.outputs.repository_type }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - id: repository
         uses: ./.github/actions/common/validate
 
@@ -33,6 +33,6 @@ jobs:
       contents: write
       packages: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Build and Publish
         uses: ./.github/actions/publish/library

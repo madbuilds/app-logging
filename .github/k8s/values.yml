@@ -4,3 +4,9 @@ service:
   image:
     name: nginx
     tag: 1.27-alpine
+  environment:
+    TZ: Europe/Moscow
+
+deployment:
+  account: default
+  environment: TEST

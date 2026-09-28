@@ -11,7 +11,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: {{ .Values.service.name }}{{- if ne .Values.deployment.environment "PRODUCTION" }}.dev{{- end }}.k3s.devim.keenetic.pro
+    - host: {{ .Values.service.name }}{{- if ne .Values.deployment.environment "PRODUCTION" }}.dev{{- end }}.{{ .Values.deployment.domain }}
       http:
         paths:
           - path: /
@@ -23,5 +23,5 @@ spec:
                   number: 80
   tls:
     - hosts:
-        - {{ .Values.service.name }}{{- if ne .Values.deployment.environment "PRODUCTION" }}.dev{{- end }}.k3s.devim.keenetic.pro
+        - {{ .Values.service.name }}{{- if ne .Values.deployment.environment "PRODUCTION" }}.dev{{- end }}.{{ .Values.deployment.domain }}
       secretName: app-{{ .Values.service.name }}-tls-secret

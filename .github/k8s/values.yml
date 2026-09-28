@@ -10,3 +10,4 @@ service:
 deployment:
   account: default
   environment: TEST
+  domain: example.com
